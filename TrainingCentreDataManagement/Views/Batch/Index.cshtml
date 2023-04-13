@@ -1,0 +1,47 @@
+﻿@model IEnumerable<TrainingCentreDataManagement.Models.Batch>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.BatchId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Batchname)
+            </th>
+           
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BatchId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Batchname)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {  id=item.BatchId }) |
+                @Html.ActionLink("Details", "Details", new {  id=item.BatchId }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.BatchId })
+            </td>
+            <td>
+                <a class="btn btn-success" asp-area="" asp-controller="Faculty" asp-action="Index" asp-route-itemid="@item.BatchId">Faculty</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
