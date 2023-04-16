@@ -13,6 +13,7 @@ namespace TrainingCentreDataManagement.Models.Repository
 
             public IEnumerable<Faculty> getdata(int bname)
             {
+           
                 List<Faculty> li = new List<Faculty>();
             var batchN = context.batches.Where(e=>e.BatchId == bname);
             var bName = batchN.First().Batchname;
@@ -28,6 +29,7 @@ namespace TrainingCentreDataManagement.Models.Repository
                     //li.Add(item);
                     li.Add(new Faculty
                     {
+                        FacultyId = item.FacultyId,
                         FacultyName = item.FacultyName,
                         Email = item.Email,
                         Batchname = item.Batchname
@@ -40,18 +42,19 @@ namespace TrainingCentreDataManagement.Models.Repository
             }
 
             //insert
-            public void AddNewRecord(Faculty sViewModel, Batch model)
+            public void AddNewRecord(Faculty sViewModel,int id)
             {
             
-            var bname = from m in context.batches select m;
+            var bname = context.batches.Where(e=>e.BatchId==id).SingleOrDefault();
             
-            var std = new Faculty()
+            Faculty std = new Faculty()
             {
+                
                 FacultyName=sViewModel.FacultyName,
                 Email=sViewModel.Email
                
             };
-            std.Batchname = bname.First().Batchname;
+            std.Batchname = bname.Batchname;
             context.Add(std);
             context.SaveChanges();
             }
@@ -62,7 +65,9 @@ namespace TrainingCentreDataManagement.Models.Repository
 
                 if (s != null)
                 {
-                    // StudentId = model.StudentId;
+                s.FacultyName = sViewModel.FacultyName;
+                s.Email = sViewModel.Email;
+                s.Batchname = sViewModel.Batchname;
 
 
                     context.SaveChanges();
@@ -73,13 +78,23 @@ namespace TrainingCentreDataManagement.Models.Repository
             //delete
             public void DeleteRecord(Faculty sViewModel)
             {
-                var s = context.Faculties.Where(x => x.Email == sViewModel.Email).SingleOrDefault();
-                context.Faculties.Remove(s);
+                var faculty = context.Faculties.SingleOrDefault(e => e.FacultyId == sViewModel.FacultyId);
+            context.Faculties.Remove(faculty);
                 context.SaveChanges();
             }
-            //search
-            
+        //search
+        public Faculty search(int id)
+        {
+            Faculty s = new Faculty();
+            Faculty se = context.Faculties.Where(x => x.FacultyId == id).SingleOrDefault();
+            s.FacultyId = se.FacultyId;
+            s.FacultyName = se.FacultyName;
+            s.Email = se.Email;
+            s.Batchname = se.Batchname;
 
-
+            return s;
         }
+
+
+    }
     }

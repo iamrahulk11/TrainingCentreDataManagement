@@ -61,8 +61,8 @@
             //delete
             public void DeleteRecord(Batch sViewModel)
             {
-                var s = context.batches.Where(e=>e.Batchname == sViewModel.Batchname).SingleOrDefault();
-                context.batches.Remove(s);
+                var std = context.batches.SingleOrDefault(e => e.BatchId == sViewModel.BatchId);
+                context.batches.Remove(std);
                 context.SaveChanges();
             }
         //search
@@ -71,11 +71,11 @@
             Batch s = new Batch();
             Batch se = context.batches.Where(x => x.BatchId == id).SingleOrDefault();
             s.Batchname = se.Batchname;
-           s.BatchId =se.BatchId;
+            s.BatchId =se.BatchId;
             
             return s;
         }
-
+       
 
 
     }

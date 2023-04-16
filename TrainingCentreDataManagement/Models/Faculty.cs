@@ -28,12 +28,13 @@ namespace TrainingCentreDataManagement.Models
         IEnumerable<Faculty> getdata(int bname);
 
         //insert
-        void AddNewRecord(Faculty sViewModel,Batch model);
+        void AddNewRecord(Faculty model, int id);
         //update
-        void EditARecord(Faculty sViewModel);
+        void EditARecord(Faculty model);
 
         //delete
-        void DeleteRecord(Faculty sViewModel);
-
+        void DeleteRecord(Faculty model);
+        //search
+        Faculty search(int id);
     }
 }

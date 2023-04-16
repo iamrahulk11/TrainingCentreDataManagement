@@ -34,10 +34,10 @@ namespace TrainingCentreDataManagement.Models
     interface Istudent
     {
         //display
-        IEnumerable<Student> getdata();
+        IEnumerable<Student> getdata(int id);
 
         //insert
-        void AddNewRecord(Student sViewModel);
+        void AddNewRecord(Student sViewModel,int id);
         //update
         void EditARecord(Student sViewModel);
 

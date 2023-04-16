@@ -1,47 +1,40 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.FileSystemGlobbing;
-
 using TrainingCentreDataManagement.Models;
 using TrainingCentreDataManagement.Models.Repository;
 
 namespace TrainingCentreDataManagement.Controllers
 {
-    public class FacultyController : Controller
+    public class StudentController : Controller
     {
+        private readonly StudentRepository context;
        
-        private readonly FacultyRepository context;
-       // private readonly BatchRepository batchRepository;
 
-
-        public FacultyController(FacultyRepository context)//,,BatchRepository batchRepository this can be possible
+        public StudentController(StudentRepository context)
         {
             this.context = context;
-           // this.batchRepository = batchRepository; 
+           
         }
-
-        
-        [HttpGet]
         public IActionResult Index()
         {
-           
             var data = HttpContext.Session.GetInt32("BatchId");
-            
+
             return View(context.getdata(Convert.ToInt32(data)));
+            
         }
         public IActionResult Create()
         {
-            Faculty s = new Faculty();
-             
+            Student s = new Student();
+
             return View(s);
         }
 
         [HttpPost]
-        public IActionResult Create(Faculty sViewModel)
+        public IActionResult Create(Student sViewModel)
         {
             try
             {
                 var mybatchid = HttpContext.Session.GetInt32("BatchId");
-                context.AddNewRecord(sViewModel,Convert.ToInt32(mybatchid));
+                context.AddNewRecord(sViewModel, Convert.ToInt32(mybatchid));
                 return RedirectToAction("Index");
             }
             catch
@@ -55,7 +48,7 @@ namespace TrainingCentreDataManagement.Controllers
             return View(context.search(id));
         }
         [HttpPost]
-        public IActionResult Edit(Faculty model)
+        public IActionResult Edit(Student model)
         {
 
             context.EditARecord(model);
@@ -69,7 +62,7 @@ namespace TrainingCentreDataManagement.Controllers
             return View(context.search(id));
         }
         [HttpPost]
-        public IActionResult Delete(Faculty model)
+        public IActionResult Delete(Student model)
         {
             try
             {
@@ -81,11 +74,6 @@ namespace TrainingCentreDataManagement.Controllers
             {
                 return View();
             }
-        }
-        public IActionResult Details(int id)
-        {
-            var data = context.search(id);
-            return View(data);
         }
 
     }

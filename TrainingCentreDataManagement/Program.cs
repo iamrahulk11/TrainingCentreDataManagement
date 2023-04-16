@@ -7,6 +7,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDb>(o=>o.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+builder.Services.AddMvc().AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 builder.Services.AddScoped<BatchRepository>();
 builder.Services.AddScoped<StudentRepository>();
 builder.Services.AddScoped<FacultyRepository>();
@@ -24,7 +27,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseSession();
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -28,7 +28,9 @@ namespace TrainingCentreDataManagement.Models
         //delete
         void DeleteRecord(Batch id);
 
+        //search
         Batch search(int id);
 
+        
     }
 }

@@ -18,7 +18,7 @@ namespace TrainingCentreDataManagement.Controllers
 
         public ActionResult Index()
         {
-            
+           
             return View(context.getdata());
 
         }
@@ -74,14 +74,22 @@ namespace TrainingCentreDataManagement.Controllers
                 return View();
             }
         }
-    /* public IActionResult Faculty(int id)
+     public IActionResult Faculty(int id)
         {
-             
             
-            TempData["mydata"] = context.search(id);
+            HttpContext.Session.SetInt32("BatchId", id);
+            //var ses = HttpContext.Session.GetInt32("BatchId");
+           // TempData.Peek("mydata") = id;
             return RedirectToAction("Index","Faculty");
         }
-        */
+        public IActionResult Student(int id)
+        {
+
+            HttpContext.Session.SetInt32("BatchId", id);
+            // TempData.Peek("mydata") = id;
+            return RedirectToAction("Index", "Student");
+        }
+
 
     }
 }
