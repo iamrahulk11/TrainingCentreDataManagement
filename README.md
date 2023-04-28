@@ -13,7 +13,7 @@ There is modules in this Application :
 3. Student Module
 4. Faculty Module
 
-Time spent: **25** hours spent in total
+Time spent: **15** hours spent in total
 
 ## Functionality
 
@@ -28,7 +28,8 @@ The following **extensions** are implemented:
 
 * [x] Technologies Used and languages Visual Studio ,.Net Framework (.Net 6), MS-SQL, C#, HTML, CSS, BOOTSTRAP
 * [x] Work on .NET framework 6, MVC core
-* [x] Used Entity Framework , Repository Pattern
+* [x] Used Entity Framework Core, Repository Pattern
+* [x] Used Code First Approach 
 
 * [ ] List anything else that you did to improve the app functionality or design!
 
