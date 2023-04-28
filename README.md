@@ -2,7 +2,7 @@
 
 ## *Rahul Kumar*
 
-**The “Training Centre Management” project is a software which helpful
+** The “Training Centre Management” project is a software which helpful
 for Mangement Team as well as Students and Faculties.It is a Web
 Application ,which helps in updating activities like enroll students and
 faculties for different batches.Our Training Centre Management
