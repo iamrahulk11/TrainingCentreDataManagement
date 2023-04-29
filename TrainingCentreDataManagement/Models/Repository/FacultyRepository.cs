@@ -13,17 +13,19 @@ namespace TrainingCentreDataManagement.Models.Repository
 
             public IEnumerable<Faculty> getdata(int bname)
             {
-           
-                List<Faculty> li = new List<Faculty>();
-            var batchN = context.batches.Where(e=>e.BatchId == bname);
-            var bName = batchN.First().Batchname;
-            if(bName == null)
-            {
+            List<Faculty> li = new List<Faculty>();
 
-            }
-            var x = from a in context.Faculties.Where(e => e.Batchname == bName) select a;
-            var xl = x.ToList();
-            
+            try
+            {
+                var batchN = context.batches.Where(e => e.BatchId == bname);
+                var bName = batchN.First().Batchname;
+                if (bName == null)
+                {
+
+                }
+                var x = from a in context.Faculties.Where(e => e.Batchname == bName) select a;
+                var xl = x.ToList();
+
                 foreach (var item in xl)
                 {
                     //li.Add(item);
@@ -35,10 +37,16 @@ namespace TrainingCentreDataManagement.Models.Repository
                         Batchname = item.Batchname
                     });
                 }
-            
-                
-                
-                return li;
+
+            }catch(Exception ex)
+            {
+                var e = ex.StackTrace;
+            }
+
+
+
+
+            return li;
             }
 
             //insert
@@ -78,9 +86,21 @@ namespace TrainingCentreDataManagement.Models.Repository
             //delete
             public void DeleteRecord(Faculty sViewModel)
             {
+            try
+            {
                 var faculty = context.Faculties.SingleOrDefault(e => e.FacultyId == sViewModel.FacultyId);
-            context.Faculties.Remove(faculty);
+                context.Faculties.Remove(faculty);
                 context.SaveChanges();
+            }
+            catch(Exception ex)
+            {
+                var e = ex.StackTrace;
+            }
+            finally
+            {
+
+            }
+               
             }
         //search
         public Faculty search(int id)

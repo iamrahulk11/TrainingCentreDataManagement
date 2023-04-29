@@ -9,11 +9,11 @@ namespace TrainingCentreDataManagement.Controllers
     public class FacultyController : Controller
     {
        
-        private readonly FacultyRepository context;
+        private readonly IFaculty context;
        // private readonly BatchRepository batchRepository;
 
 
-        public FacultyController(FacultyRepository context)//,,BatchRepository batchRepository this can be possible
+        public FacultyController(IFaculty context)//,,BatchRepository batchRepository this can be possible
         {
             this.context = context;
            // this.batchRepository = batchRepository; 
@@ -73,7 +73,6 @@ namespace TrainingCentreDataManagement.Controllers
         {
             try
             {
-
                 context.DeleteRecord(model);
                 return RedirectToAction("Index");
             }
@@ -82,6 +81,7 @@ namespace TrainingCentreDataManagement.Controllers
                 return View();
             }
         }
+
         public IActionResult Details(int id)
         {
             var data = context.search(id);

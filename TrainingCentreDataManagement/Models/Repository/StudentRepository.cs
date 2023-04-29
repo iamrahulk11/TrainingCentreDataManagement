@@ -14,30 +14,34 @@ namespace TrainingCentreDataManagement.Models
         public IEnumerable<Student> getdata(int bname)
         {
             List<Student> li = new List<Student>();
-            var batchN = context.batches.Where(e => e.BatchId == bname);
-            var bName = batchN.First().Batchname;
-            if (bName == null)
+            try
             {
-
-            }
-            var x = from a in context.students.Where(e => e.Batchname == bName) select a;
-            var xl = x.ToList();
-
-            foreach (var item in xl)
-            {
-                //li.Add(item);
-                li.Add(new Student
+                var batchN = context.batches.Where(e => e.BatchId == bname);
+                var bName = batchN.First().Batchname;
+                if (bName == null)
                 {
-                    Studentid = item.Studentid,
-                    StudentName = item.StudentName,
-                    Email = item.Email,
-                    PhoneNo= item.PhoneNo,
-                    SC= item.SC,
-                    Batchname = item.Batchname
-                });
+
+                }
+                var x = from a in context.students.Where(e => e.Batchname == bName) select a;
+                var xl = x.ToList();
+
+                foreach (var item in xl)
+                {
+                    //li.Add(item);
+                    li.Add(new Student
+                    {
+                        Studentid = item.Studentid,
+                        StudentName = item.StudentName,
+                        Email = item.Email,
+                        PhoneNo = item.PhoneNo,
+                        SC = item.SC,
+                        Batchname = item.Batchname
+                    });
+                }
+
+            }catch(Exception ex) {
+                var e = ex.StackTrace;
             }
-
-
 
             return li;
         }

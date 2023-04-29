@@ -10,9 +10,13 @@ builder.Services.AddDbContext<ApplicationDb>(o=>o.UseSqlServer(builder.Configura
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 builder.Services.AddMvc().AddSessionStateTempDataProvider();
 builder.Services.AddSession();
-builder.Services.AddScoped<BatchRepository>();
-builder.Services.AddScoped<StudentRepository>();
-builder.Services.AddScoped<FacultyRepository>();
+builder.Services.AddScoped<IBatch,BatchRepository>();
+builder.Services.AddScoped<Istudent,StudentRepository>();
+builder.Services.AddScoped<IFaculty,FacultyRepository>();
+/*builder.Services.AddScoped<IBatch>();
+builder.Services.AddScoped<IFaculty>();
+builder.Services.AddScoped<Istudent>();*/
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

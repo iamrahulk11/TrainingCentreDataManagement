@@ -11,7 +11,8 @@ namespace TrainingCentreDataManagement.Models
         public int Studentid { get; set; }
 
         [Required]
-        [EmailAddress]
+        //[EmailAddress]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$",ErrorMessage ="Invalid Email")]
         public string Email { get; set; }
 
         [Required]
@@ -31,7 +32,7 @@ namespace TrainingCentreDataManagement.Models
         [Required]
         public string Batchname { get; set; }
     }
-    interface Istudent
+    public interface Istudent
     {
         //display
         IEnumerable<Student> getdata(int id);
@@ -43,6 +44,9 @@ namespace TrainingCentreDataManagement.Models
 
         //delete
         void DeleteRecord(Student sViewModel);
-        
+
+        //search
+        Student search(int id);
+
     }
 }

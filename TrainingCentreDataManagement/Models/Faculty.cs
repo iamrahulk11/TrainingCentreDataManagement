@@ -22,7 +22,7 @@ namespace TrainingCentreDataManagement.Models
         public string Batchname { get; set; }
 
     }
-    interface IFaculty
+    public interface IFaculty
     {
         //display
         IEnumerable<Faculty> getdata(int bname);

@@ -6,10 +6,10 @@ namespace TrainingCentreDataManagement.Controllers
 {
     public class StudentController : Controller
     {
-        private readonly StudentRepository context;
+        private readonly Istudent context;
        
 
-        public StudentController(StudentRepository context)
+        public StudentController(Istudent context)
         {
             this.context = context;
            
@@ -74,6 +74,11 @@ namespace TrainingCentreDataManagement.Controllers
             {
                 return View();
             }
+        }
+        public IActionResult Details(int id)
+        {
+            var data = context.search(id);
+            return View(data);
         }
 
     }

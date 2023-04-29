@@ -15,7 +15,7 @@ namespace TrainingCentreDataManagement.Models
         
         
     }
-    interface IBatch
+    public interface IBatch
     {
         //display
         IEnumerable<Batch> getdata();

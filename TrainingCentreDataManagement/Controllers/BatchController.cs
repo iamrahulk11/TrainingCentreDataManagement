@@ -7,9 +7,9 @@ namespace TrainingCentreDataManagement.Controllers
 {
     public class BatchController : Controller
     {
-        public BatchRepository context;
+        private IBatch context;
 
-        public BatchController(BatchRepository context)
+        public BatchController(IBatch context)
         {
             this.context = context;
         }
@@ -65,7 +65,6 @@ namespace TrainingCentreDataManagement.Controllers
         {
             try
             {
-                
                 context.DeleteRecord(model);
                 return RedirectToAction("Index");
             }

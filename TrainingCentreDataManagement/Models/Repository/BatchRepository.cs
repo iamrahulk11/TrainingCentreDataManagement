@@ -13,20 +13,27 @@
             public IEnumerable<Batch> getdata()
             {
                 List<Batch> li = new List<Batch>();
-               
+            try
+            {
                 var x = from a in context.batches select a;
                 var xl = x.ToList();
                 foreach (var item in xl)
                 {
-                    
+
                     li.Add(new Batch
                     {
                         BatchId = item.BatchId,
                         Batchname = item.Batchname
-                        
+
                     });
                 }
-            
+
+            }
+            catch(Exception ex)
+            {
+                var e = ex.StackTrace;
+            }
+
                 return li;
             }
 
@@ -37,12 +44,10 @@
 
             batch.Batchname = sViewModel.Batchname;
 
-            
-            
-
             context.Add(batch);
                 context.SaveChanges();
             }
+
             //update
             public void EditARecord(int id,Batch sViewModel)
             {
@@ -61,9 +66,16 @@
             //delete
             public void DeleteRecord(Batch sViewModel)
             {
+            try
+            {
                 var std = context.batches.SingleOrDefault(e => e.BatchId == sViewModel.BatchId);
                 context.batches.Remove(std);
                 context.SaveChanges();
+            }catch(Exception ex)
+            {
+                var e = ex.StackTrace;
+            }
+                
             }
         //search
         public Batch search(int id)
