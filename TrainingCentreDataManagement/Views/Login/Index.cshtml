@@ -14,37 +14,53 @@
     <title>Login</title>
 </head>
 <body>
+     <script src="~/jquery/jquery.js"></script>
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/jquery/jquery.slim.js"></script>
+    <script src="~/jquery/jquery.slim.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">TrainingCentreDataManagement</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                @*<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>               
+                </button>   *@            
             </div>
         </nav>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            
-<h1 class="text-center">Login</h1>
-<div class="col-12">
-<div class = "col-6 offset-3">
-    <div style="border:2px black ridge;padding:10px;">
-        <form asp-controller="Login" asp-action="Index" method="post">
+            <div class="p-2">
+            <button type="button" class="btn btn-success" data-toggle="modal" id="btnAddRecord"> Login Admin </button>
+        </div>
+        <div class="p-2">
+            <button type="button" class="btn btn-success" data-toggle="modal" id="btnAddRecord2"> Login Student </button>
+        </div>
+
+
+<div class="modal fade-modal" tabindex="-1" aria-labelledby="exampleModalLabel" id="AddUserModal" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content m-2">
+            <div class="modal-header">
+                <h1 class="text-success modal-title" id="UserHeader">Admin Login</h1>
+                <h1 class="text-success modal-title" id="StudentHeader">Student Login</h1>
+                <button type="button" class="btn-close" onclick="$('#AddUserModal').modal('hide');"></button>
+            </div>
+            <div class="modal-body">
+                 <form asp-controller="Login" asp-action="Index" method="post">
             <table height="200" class="table table-borderless">
 
-                <tr>
-                    <th colspan="2" class="text-center" style="font-size:20px;">Login User</th>
-                </tr>
-
+               
                 <tr>
                     <td>
                                     @Html.LabelFor(model=>model.username)
                     </td>                    
                     <td>
-                                    @Html.TextBoxFor(model=>model.username,new{@class="form-control"})
+                                    @Html.TextBoxFor(model=>model.username,new{@class="form-control",@autocomplete="off"})
                                     @Html.ValidationMessageFor(model=>model.username,"",new{@class="text-danger"})
                     </td>
                 <tr>
@@ -53,9 +69,9 @@
                                             @Html.LabelFor(model=>model.password)
                     </td>
                     <td>
-                                            @Html.TextBoxFor(model=>model.password,new{ @class="form-control",type="password"})
+                                                    @Html.TextBoxFor(model=>model.password,new{ @class="form-control",type="password",@autocomplete="off"})
                                             @Html.ValidationMessageFor(model=>model.password,"",new{@class="text-danger"})
-                                            @ViewBag.ErrorMessage
+                                           
                     </td>
                 </tr>
 
@@ -69,8 +85,8 @@
                         <br />
                                             @if (ViewData["ValidationMessage"] != null)
                                             {
-                                            <br />
-                                                <lable>@ViewData["ValidationMessage"]</lable>
+                                                <br />
+                                                    <lable>@ViewData["ValidationMessage"]</lable>
                                             }
                     </td>
 
@@ -78,10 +94,36 @@
 
             </table>
         </form>
+              
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger btn-default" onclick="$('#AddUserModal').modal('hide');">Close</button>
+            </div>
+        </div>
+
     </div>
 </div>
-</div>
-</div>
+
         </main>
+       
+
+        
+        <script>
+            $('#btnAddRecord').on('click', function () {
+            $('#AddUserModal').modal('show');
+            $("#StudentHeader").css('display','none');
+            $("#UserHeader").css('display','block');
+            
+});
+$('#btnAddRecord2').on('click', function () {
+            $('#AddUserModal').modal('show');
+            $("#StudentHeader").css('display','block');
+            $("#UserHeader").css('display','none');
+            
+});
+        </script>
+
+        
+
 </body>
 </html>
