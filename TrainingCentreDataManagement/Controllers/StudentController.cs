@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TrainingCentreDataManagement.Models;
 using TrainingCentreDataManagement.Models.Repository;
 
 namespace TrainingCentreDataManagement.Controllers
 {
+    [Authorize]
     public class StudentController : Controller
     {
         private readonly Istudent context;

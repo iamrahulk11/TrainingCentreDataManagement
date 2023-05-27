@@ -1,10 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using TrainingCentreDataManagement.Models;
 using TrainingCentreDataManagement.Models.Repository;
 
 namespace TrainingCentreDataManagement.Controllers
 {
+    [Authorize]
     public class BatchController : Controller
     {
         private IBatch context;
@@ -14,11 +18,18 @@ namespace TrainingCentreDataManagement.Controllers
             this.context = context;
         }
 
-        
 
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index","Login");
+        }
         public ActionResult Index()
         {
-           
+            /*if (HttpContext.Session.GetString("Username") == null)
+            {
+                return RedirectToAction("Index", "Login");
+            }*/
             return View(context.getdata());
 
         }
@@ -89,6 +100,10 @@ namespace TrainingCentreDataManagement.Controllers
             return RedirectToAction("Index", "Student");
         }
 
-
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }

@@ -1,0 +1,87 @@
+﻿@model TrainingCentreDataManagement.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TrainingCentreDataManagement.styles.css" asp-append-version="true" />
+    <title>Login</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Login" asp-action="Index">TrainingCentreDataManagement</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>               
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            
+<h1 class="text-center">Login</h1>
+<div class="col-12">
+<div class = "col-6 offset-3">
+    <div style="border:2px black ridge;padding:10px;">
+        <form asp-controller="Login" asp-action="Index" method="post">
+            <table height="200" class="table table-borderless">
+
+                <tr>
+                    <th colspan="2" class="text-center" style="font-size:20px;">Login User</th>
+                </tr>
+
+                <tr>
+                    <td>
+                                    @Html.LabelFor(model=>model.username)
+                    </td>                    
+                    <td>
+                                    @Html.TextBoxFor(model=>model.username,new{@class="form-control"})
+                                    @Html.ValidationMessageFor(model=>model.username,"",new{@class="text-danger"})
+                    </td>
+                <tr>
+                <tr>
+                    <td>
+                                            @Html.LabelFor(model=>model.password)
+                    </td>
+                    <td>
+                                            @Html.TextBoxFor(model=>model.password,new{ @class="form-control",type="password"})
+                                            @Html.ValidationMessageFor(model=>model.password,"",new{@class="text-danger"})
+                                            @ViewBag.ErrorMessage
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <label><input type="checkbox" asp-for="KeepLoggedIn"/>
+                            Keep logged In</label>
+                            <br />
+                        <button type="submit" class="btn btn-success">Login</button>
+                        <br />
+                                            @if (ViewData["ValidationMessage"] != null)
+                                            {
+                                            <br />
+                                                <lable>@ViewData["ValidationMessage"]</lable>
+                                            }
+                    </td>
+
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+        </main>
+</body>
+</html>

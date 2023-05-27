@@ -4,7 +4,7 @@
 
 namespace TrainingCentreDataManagement.Migrations
 {
-    public partial class DbMig : Migration
+    public partial class TrainingCentreDataManagement : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,20 +37,6 @@ namespace TrainingCentreDataManagement.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "login",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_login", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "student",
                 columns: table => new
                 {
@@ -66,6 +52,21 @@ namespace TrainingCentreDataManagement.Migrations
                 {
                     table.PrimaryKey("PK_student", x => x.Studentid);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "users",
+                columns: table => new
+                {
+                    AutoID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    KeepLoggedIn = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_users", x => x.AutoID);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -77,10 +78,10 @@ namespace TrainingCentreDataManagement.Migrations
                 name: "faculty");
 
             migrationBuilder.DropTable(
-                name: "login");
+                name: "student");
 
             migrationBuilder.DropTable(
-                name: "student");
+                name: "users");
         }
     }
 }

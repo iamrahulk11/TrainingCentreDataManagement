@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileSystemGlobbing;
 
 using TrainingCentreDataManagement.Models;
@@ -6,6 +7,7 @@ using TrainingCentreDataManagement.Models.Repository;
 
 namespace TrainingCentreDataManagement.Controllers
 {
+    [Authorize]
     public class FacultyController : Controller
     {
        

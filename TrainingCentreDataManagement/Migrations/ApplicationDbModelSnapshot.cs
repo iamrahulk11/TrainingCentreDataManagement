@@ -64,25 +64,28 @@ namespace TrainingCentreDataManagement.Migrations
                     b.ToTable("faculty");
                 });
 
-            modelBuilder.Entity("TrainingCentreDataManagement.Models.Login", b =>
+            modelBuilder.Entity("TrainingCentreDataManagement.Models.LoginModel", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("AutoID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AutoID"), 1L, 1);
 
-                    b.Property<string>("Password")
+                    b.Property<bool>("KeepLoggedIn")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("username")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("AutoID");
 
-                    b.ToTable("login");
+                    b.ToTable("users");
                 });
 
             modelBuilder.Entity("TrainingCentreDataManagement.Models.Student", b =>
